@@ -1,0 +1,88 @@
+
+.negocios-page {
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+.page-header {
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.page-header h1 {
+  font-size: 1.8rem;
+  color: #1a3c34;
+  margin-bottom: 0.5rem;
+}
+
+.subtitle {
+  color: #555;
+  font-size: 1rem;
+}
+
+.negocios-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.negocio-card {
+  background: #fff;
+  border: 1px solid #dde8e0;
+  border-radius: 10px;
+  transition: box-shadow 0.2s, transform 0.1s;
+}
+
+.negocio-card:hover {
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
+}
+
+.negocio-link {
+  display: flex;
+  align-items: center;
+  padding: 1rem 1.25rem;
+  text-decoration: none;
+  color: inherit;
+  gap: 0.75rem;
+}
+
+.negocio-nombre {
+  font-weight: 600;
+  font-size: 1.05rem;
+  color: #1a3c34;
+  flex: 1;
+}
+
+.negocio-categoria {
+  font-size: 0.85rem;
+  background: #e8f5e9;
+  color: #2e7d32;
+  padding: 0.2rem 0.6rem;
+  border-radius: 20px;
+  white-space: nowrap;
+}
+
+.negocio-arrow {
+  color: #888;
+  font-size: 1.1rem;
+}
+
+.status-container {
+  display: flex;
+  justify-content: center;
+  padding: 3rem 1rem;
+}
+
+.status-msg {
+  font-size: 1.1rem;
+  color: #555;
+}
+
+.status-msg.error {
+  color: #c0392b;
+}
