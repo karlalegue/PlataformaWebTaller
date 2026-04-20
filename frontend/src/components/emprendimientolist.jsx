@@ -1,10 +1,10 @@
 
-import { useEffect, useState } from "react";
+import { useEffect, useState } from "react"; /*guarda datos en el componente*/
 import { Link } from "react-router-dom";
-import { getEmprendimientos } from "../services/api";
+import { getEmprendimientos } from "../services/api"; /*peticion http al backend --> lista de emprendimiento*/
 import "./emprendimientolist.css";
 
-export default function EmprendimientoList() {
+export default function EmprendimientoList() { 
   const [emprendimientos, setEmprendimientos] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
