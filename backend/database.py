@@ -2,7 +2,7 @@ import sqlite3
 import os
 
 path=os.path.join(os.path.dirname(__file__), "data", "ValleSimpson.db")
- {/* cada vez que el backend quiera consultar datos*/}
+ {/*cada vez que el backend quiera consultar datos*/}
 
 def get_connection()-> sqlite3.Connection:
     conn = sqlite3.connect(path)
