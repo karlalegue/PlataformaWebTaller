@@ -5,7 +5,7 @@ from passlib.context import CryptContext
 from fastapi import Depends, HTTPException
 from fastapi.security import OAuth2PasswordBearer
 
-CLAVE_SECRETA = os.getenv("SECRET_KEY", "clave-local-desarrollo-cambiar-en-produccion")
+CLAVE_SECRETA = os.getenv("SECRET_KEY", "valle-simpson")
 ALGORITMO = "HS256"
 HORAS_EXPIRACION = 10
 contexto_bcrypt = CryptContext(schemes=["bcrypt"], deprecated="auto")
