@@ -13,7 +13,7 @@ def crear_administrador(nombre_usuario: str, contrasena: str) -> None:
     conexion = get_connection()
     cursor = conexion.cursor()
 
-    # Verifica si el administrador ya existe para no duplicarlo
+    #verifica si el administrador ya existe para no duplicarlo
     cursor.execute("SELECT id FROM admin WHERE username = ?", (nombre_usuario,))
     if cursor.fetchone():
         print(f"El administrador '{nombre_usuario}' ya existe.")
@@ -26,7 +26,7 @@ def crear_administrador(nombre_usuario: str, contrasena: str) -> None:
     )
     conexion.commit()
     conexion.close()
-    print(f"✅ Administrador '{nombre_usuario}' creado exitosamente.")
+    print(f"Administrador '{nombre_usuario}' creado exitosamente.")
 
 
 if __name__ == "__main__":

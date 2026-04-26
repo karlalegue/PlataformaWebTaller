@@ -86,7 +86,6 @@
 .status-msg.error {
   color: #c0392b;
 }
-<<<<<<< HEAD
 
 .filtro-container {
   margin-bottom: 1.25rem;
@@ -108,5 +107,3 @@
 .filtro-select:focus {
   border-color: #1D9E75;
 }
-=======
->>>>>>> 05839caf310bc7295688df458bf48275c1ca2437

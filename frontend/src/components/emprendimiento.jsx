@@ -72,14 +72,6 @@ export default function Emprendimiento() {
   );
 }
 
-<<<<<<< HEAD
-
-=======
-/**
- * Subcomponente reutilizable para cada fila de información.
- * Recibe icono, etiqueta y valor como props.
- */
->>>>>>> 05839caf310bc7295688df458bf48275c1ca2437
 function InfoRow({etiqueta, valor}) {
   return (
     <div className="info-row">
