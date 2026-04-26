@@ -1,11 +1,7 @@
 fastapi==0.111.0
 uvicorn==0.29.0
 pydantic==2.7.1
-<<<<<<< HEAD
 pydantic-core==2.18.2
 python-jose[cryptography]==3.3.0
 passlib[bcrypt]==1.7.4
 python-multipart==0.0.9
-=======
-pydantic-core==2.18.2
->>>>>>> 05839caf310bc7295688df458bf48275c1ca2437
