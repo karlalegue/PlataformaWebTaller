@@ -14,14 +14,6 @@ def init_db() -> None:
 
     conexion = get_connection()
     cursor = conexion.cursor()
-
-    cursor.execute("""CREATE TABLE IF NOT EXISTS admin (
-            id            INTEGER PRIMARY KEY AUTOINCREMENT,
-            username      TEXT NOT NULL UNIQUE,
-            password_hash TEXT NOT NULL
-        )
-    """)
-
     conexion.commit()
     conexion.close()
-    print(f"Base de datos encontrada en: {ruta}")
+    print(f"Base de datos encontrada: {ruta}")
