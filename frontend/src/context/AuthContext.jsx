@@ -1,23 +1,24 @@
-
 import { createContext, useContext, useState } from "react";
 
 const ContextoAuth = createContext(null);
 
 export function ProveedorAuth({ children }) {
-  const [token, setToken] = useState(localStorage.getItem("token_admin") || null);
+  const [estaAutenticado, setEstaAutenticado] = useState(
+    sessionStorage.getItem("admin_autenticado") === "true"
+  );
 
-  const iniciarSesion = (nuevoToken) => {
-    localStorage.setItem("token_admin", nuevoToken);
-    setToken(nuevoToken);
+  const iniciarSesion = () => {
+    sessionStorage.setItem("admin_autenticado", "true");
+    setEstaAutenticado(true);
   };
 
   const cerrarSesion = () => {
-    localStorage.removeItem("token_admin");
-    setToken(null);
+    sessionStorage.removeItem("admin_autenticado");
+    setEstaAutenticado(false);
   };
 
   return (
-    <ContextoAuth.Provider value={{ token, iniciarSesion, cerrarSesion, estaAutenticado: !!token }}>
+    <ContextoAuth.Provider value={{ estaAutenticado, iniciarSesion, cerrarSesion }}>
       {children}
     </ContextoAuth.Provider>
   );

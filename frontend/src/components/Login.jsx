@@ -19,8 +19,8 @@ export default function Login() {
     setCargando(true);
 
     try {
-    const datos = await iniciarSesionAdmin(nombreUsuario, contrasena);
-    iniciarSesion(datos.token_acceso);
+    await iniciarSesionAdmin(nombreUsuario, contrasena);
+    iniciarSesion();
     navegar("/admin");
     } catch (err) {
     setError(err.message);

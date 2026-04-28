@@ -1,11 +1,12 @@
 
 from fastapi import APIRouter, HTTPException
 from database import get_connection
-from models.auth import SolicitudLogin, TokenRespuesta
-from seguridad import verificar_contrasena, crear_token
+from models.auth import SolicitudLogin, RespuestaLogin
+from seguridad import verificar_contrasena
 
 enrutador = APIRouter(prefix="/api/auth", tags=["autenticación"])
-@enrutador.post("/login", response_model=TokenRespuesta)
+
+@enrutador.post("/login", response_model=RespuestaLogin)
 def iniciar_sesion(credenciales: SolicitudLogin):
     conexion = get_connection()
     cursor = conexion.cursor()
@@ -20,5 +21,4 @@ def iniciar_sesion(credenciales: SolicitudLogin):
             status_code=401,
             detail="Usuario o contraseña incorrectos"
         )
-    token = crear_token(credenciales.nombre_usuario)
-    return {"token_acceso": token, "tipo_token": "bearer"}
+    return {"autenticado": True, "nombre_usuario": credenciales.nombre_usuario}
