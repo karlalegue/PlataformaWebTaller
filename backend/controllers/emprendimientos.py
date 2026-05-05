@@ -80,11 +80,9 @@ def crear_emprendimiento(datos: EmprendimientoEntrada):
     cat = cursor.fetchone()
     if cat is None:
         raise HTTPException(status_code=400, detail="Categoría no encontrada")
-    cursor.execute("""
-        INSERT INTO emprendimientos
+    cursor.execute("""INSERT INTO emprendimientos
             (nombre_emprendimiento, categoria_id, horario, telefono, redes_sociales, direccion, latitud, longitud)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?)
-    """, (datos.nombre_emprendimiento, cat["id"], datos.horario, datos.telefono, datos.redes_sociales, datos.direccion, datos.latitud, datos.longitud))
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?)""", (datos.nombre_emprendimiento, cat["id"], datos.horario, datos.telefono, datos.redes_sociales, datos.direccion, datos.latitud, datos.longitud))
     conexion.commit()
     nuevo_id = cursor.lastrowid
     conexion.close()
@@ -102,12 +100,7 @@ def editar_emprendimiento(emprendimiento_id: int, datos: EmprendimientoEntrada):
     cat = cursor.fetchone()
     if cat is None:
         raise HTTPException(status_code=400, detail="Categoría no encontrada")
-    cursor.execute("""
-        UPDATE emprendimientos SET
-            nombre_emprendimiento = ?, categoria_id = ?, horario = ?,
-            telefono = ?, redes_sociales = ?, direccion = ?, latitud = ?, longitud = ?
-        WHERE id = ?
-    """, (datos.nombre_emprendimiento, cat["id"], datos.horario, datos.telefono,datos.redes_sociales, datos.direccion, datos.latitud, datos.longitud, emprendimiento_id))
+    cursor.execute("""UPDATE emprendimientos SET nombre_emprendimiento = ?, categoria_id = ?, horario = ?, telefono = ?, redes_sociales = ?, direccion = ?, latitud = ?, longitud = ? WHERE id = ?""", (datos.nombre_emprendimiento, cat["id"], datos.horario, datos.telefono,datos.redes_sociales, datos.direccion, datos.latitud, datos.longitud, emprendimiento_id))
     conexion.commit()
     conexion.close()
     return get_emprendimiento(emprendimiento_id)

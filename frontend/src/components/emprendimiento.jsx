@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { getEmprendimiento } from "../services/api";
 import "./emprendimiento.css";
-
+import MapaEmprendimiento from "./MapaEmprendimiento";
 export default function Emprendimiento() {
   
   const { id } = useParams();
@@ -67,6 +67,11 @@ export default function Emprendimiento() {
             <InfoRow etiqueta="Redes sociales" valor={emprendimiento.redes_sociales} />
           )}
         </section>
+        <MapaEmprendimiento
+            nombre={emprendimiento.nombre_emprendimiento}
+            latitud={emprendimiento.latitud}
+            longitud={emprendimiento.longitud}
+        />
       </div>
     </div>
   );
