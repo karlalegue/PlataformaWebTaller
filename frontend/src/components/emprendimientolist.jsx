@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { getEmprendimientos, getCategorias } from "../services/api";
 import "./emprendimientolist.css";
 
-// Ícono por categoría para dar personalidad visual a cada tarjeta
+
 const ICONOS_CATEGORIA = {
   "Minimarket - Carnicería": "🥩",
   "Artesanias en Madera":    "🪵",
@@ -22,14 +22,14 @@ export default function EmprendimientoList() {
   const [cargando, setCargando]               = useState(true);
   const [error, setError]                     = useState(null);
 
-  // Carga las categorías una sola vez al montar el componente
+
   useEffect(() => {
     getCategorias()
       .then((datos) => setCategorias(datos))
       .catch(() => setCategorias([]));
   }, []);
 
-  // Recarga los emprendimientos cada vez que cambia la categoría activa
+
   useEffect(() => {
     setCargando(true);
     setError(null);
@@ -41,7 +41,7 @@ export default function EmprendimientoList() {
 
   return (
     <>
-      {/* ── Hero ─────────────────────────────────────────── */}
+    
       <section className="hero">
         <div className="hero-contenido">
           <span className="hero-etiqueta">Región de Aysén · Chile</span>
@@ -52,10 +52,10 @@ export default function EmprendimientoList() {
         </div>
       </section>
 
-      {/* ── Listado ──────────────────────────────────────── */}
+    
       <main className="listado-seccion">
 
-        {/* Filtro por categoría */}
+    
         {categorias.length > 0 && (
           <div className="filtro-contenedor">
             <label className="filtro-label" htmlFor="filtro">
@@ -75,7 +75,6 @@ export default function EmprendimientoList() {
           </div>
         )}
 
-        {/* Cabecera con título y conteo */}
         {!cargando && !error && (
           <div className="seccion-cabecera">
             <h2 className="seccion-titulo">
@@ -87,7 +86,6 @@ export default function EmprendimientoList() {
           </div>
         )}
 
-        {/* Estados de carga y error */}
         {cargando && (
           <div className="estado-contenedor">
             <p className="estado-mensaje">Cargando emprendimientos...</p>
@@ -96,11 +94,10 @@ export default function EmprendimientoList() {
 
         {error && (
           <div className="estado-contenedor">
-            <p className="estado-mensaje error">❌ {error}</p>
+            <p className="estado-mensaje error"> {error}</p>
           </div>
         )}
 
-        {/* Lista de tarjetas */}
         {!cargando && !error && (
           emprendimientos.length === 0 ? (
             <p className="lista-vacia">No hay emprendimientos en esta categoría.</p>
