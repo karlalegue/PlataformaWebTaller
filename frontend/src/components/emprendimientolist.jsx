@@ -3,21 +3,33 @@ import { Link } from "react-router-dom";
 import { getEmprendimientos, getCategorias } from "../services/api";
 import "./emprendimientolist.css";
 
+// Ícono por categoría para dar personalidad visual a cada tarjeta
+const ICONOS_CATEGORIA = {
+  "Minimarket - Carnicería": "🥩",
+  "Artesanias en Madera":    "🪵",
+  "Avicola":                 "🐓",
+  "Papelería / Servicios de Fotocopiado": "📋",
+};
+
+function iconoCategoria(categoria) {
+  return ICONOS_CATEGORIA[categoria] || "🏪";
+}
+
 export default function EmprendimientoList() {
   const [emprendimientos, setEmprendimientos] = useState([]);
-  const [categorias, setCategorias] = useState([]);
+  const [categorias, setCategorias]           = useState([]);
   const [categoriaActiva, setCategoriaActiva] = useState("");
-  const [cargando, setCargando] = useState(true);
-  const [error, setError] = useState(null);
+  const [cargando, setCargando]               = useState(true);
+  const [error, setError]                     = useState(null);
 
-
+  // Carga las categorías una sola vez al montar el componente
   useEffect(() => {
     getCategorias()
       .then((datos) => setCategorias(datos))
       .catch(() => setCategorias([]));
   }, []);
 
-
+  // Recarga los emprendimientos cada vez que cambia la categoría activa
   useEffect(() => {
     setCargando(true);
     setError(null);
@@ -27,62 +39,91 @@ export default function EmprendimientoList() {
       .finally(() => setCargando(false));
   }, [categoriaActiva]);
 
-  if (cargando) {
-    return (
-      <div className="status-container">
-        <p className="status-msg">Cargando emprendimientos...</p>
-      </div>
-    );
-  }
-
-  if (error) {
-    return (
-      <div className="status-container">
-        <p className="status-msg error">{error}</p>
-      </div>
-    );
-  }
-
   return (
-    <div className="negocios-page">
-      <header className="page-header">
-        <h1>Emprendimientos de Valle Simpson</h1>
-        <p className="subtitle">
-          Descubre el comercio local. Selecciona un emprendimiento para ver su información completa.
-        </p>
-      </header>
-
-      
-      {categorias.length > 0 && (
-        <div className="filtro-container">
-          <select
-            className="filtro-select"
-            value={categoriaActiva}
-            onChange={(e) => setCategoriaActiva(e.target.value)}
-          >
-            <option value="">Todas las categorías</option>
-            {categorias.map((categoria) => (
-              <option key={categoria} value={categoria}>{categoria}</option>
-            ))}
-          </select>
+    <>
+      {/* ── Hero ─────────────────────────────────────────── */}
+      <section className="hero">
+        <div className="hero-contenido">
+          <span className="hero-etiqueta">Región de Aysén · Chile</span>
+          <h1 className="hero-titulo">Valle Simpson</h1>
+          <p className="hero-subtitulo">
+            Descubre el comercio y los emprendimientos locales de nuestra comunidad
+          </p>
         </div>
-      )}
+      </section>
 
-      {emprendimientos.length === 0 ? (
-        <p className="status-msg">No hay emprendimientos en esta categoría.</p>
-      ) : (
-        <ul className="emprendimientos-list">
-          {emprendimientos.map((emprendimiento) => (
-            <li key={emprendimiento.id} className="negocio-card">
-              <Link to={`/emprendimientos/${emprendimiento.id}`} className="emprendimiento-link">
-                <span className="emprendimiento-nombre">{emprendimiento.nombre_emprendimiento}</span>
-                <span className="emprendimiento-categoria">{emprendimiento.categoria_emprendimiento}</span>
-                <span className="emprendimiento-arrow">→</span>
-              </Link>
-            </li>
-          ))}
-        </ul>
-      )}
-    </div>
+      {/* ── Listado ──────────────────────────────────────── */}
+      <main className="listado-seccion">
+
+        {/* Filtro por categoría */}
+        {categorias.length > 0 && (
+          <div className="filtro-contenedor">
+            <label className="filtro-label" htmlFor="filtro">
+              Filtrar por categoría
+            </label>
+            <select
+              id="filtro"
+              className="filtro-select"
+              value={categoriaActiva}
+              onChange={(e) => setCategoriaActiva(e.target.value)}
+            >
+              <option value="">Todas las categorías</option>
+              {categorias.map((cat) => (
+                <option key={cat} value={cat}>{cat}</option>
+              ))}
+            </select>
+          </div>
+        )}
+
+        {/* Cabecera con título y conteo */}
+        {!cargando && !error && (
+          <div className="seccion-cabecera">
+            <h2 className="seccion-titulo">
+              {categoriaActiva ? categoriaActiva : "Todos los emprendimientos"}
+            </h2>
+            <span className="seccion-conteo">
+              {emprendimientos.length} {emprendimientos.length === 1 ? "resultado" : "resultados"}
+            </span>
+          </div>
+        )}
+
+        {/* Estados de carga y error */}
+        {cargando && (
+          <div className="estado-contenedor">
+            <p className="estado-mensaje">Cargando emprendimientos...</p>
+          </div>
+        )}
+
+        {error && (
+          <div className="estado-contenedor">
+            <p className="estado-mensaje error">❌ {error}</p>
+          </div>
+        )}
+
+        {/* Lista de tarjetas */}
+        {!cargando && !error && (
+          emprendimientos.length === 0 ? (
+            <p className="lista-vacia">No hay emprendimientos en esta categoría.</p>
+          ) : (
+            <ul className="emprendimientos-lista">
+              {emprendimientos.map((emp) => (
+                <li key={emp.id} className="tarjeta">
+                  <Link to={`/emprendimientos/${emp.id}`} className="tarjeta-enlace">
+                    <div className="tarjeta-icono">
+                      {iconoCategoria(emp.categoria_emprendimiento)}
+                    </div>
+                    <div className="tarjeta-info">
+                      <div className="tarjeta-nombre">{emp.nombre_emprendimiento}</div>
+                      <span className="tarjeta-categoria">{emp.categoria_emprendimiento}</span>
+                    </div>
+                    <span className="tarjeta-flecha">→</span>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          )
+        )}
+      </main>
+    </>
   );
 }
