@@ -4,16 +4,7 @@ import { getEmprendimientos, getCategorias } from "../services/api";
 import "./emprendimientolist.css";
 
 
-const ICONOS_CATEGORIA = {
-  "Minimarket - Carnicería": "🥩",
-  "Artesanias en Madera":    "🪵",
-  "Avicola":                 "🐓",
-  "Papelería / Servicios de Fotocopiado": "📋",
-};
 
-function iconoCategoria(categoria) {
-  return ICONOS_CATEGORIA[categoria] || "🏪";
-}
 
 export default function EmprendimientoList() {
   const [emprendimientos, setEmprendimientos] = useState([]);
