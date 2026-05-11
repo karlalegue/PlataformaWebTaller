@@ -97,9 +97,7 @@ export default function EmprendimientoList() {
               {emprendimientos.map((emp) => (
                 <li key={emp.id} className="tarjeta">
                   <Link to={`/emprendimientos/${emp.id}`} className="tarjeta-enlace">
-                    <div className="tarjeta-icono">
-                      {iconoCategoria(emp.categoria_emprendimiento)}
-                    </div>
+            
                     <div className="tarjeta-info">
                       <div className="tarjeta-nombre">{emp.nombre_emprendimiento}</div>
                       <span className="tarjeta-categoria">{emp.categoria_emprendimiento}</span>
