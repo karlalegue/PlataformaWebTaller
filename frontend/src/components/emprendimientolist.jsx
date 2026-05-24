@@ -3,9 +3,6 @@ import { Link } from "react-router-dom";
 import { getEmprendimientos, getCategorias } from "../services/api";
 import "./emprendimientolist.css";
 
-
-
-
 export default function EmprendimientoList() {
   const [emprendimientos, setEmprendimientos] = useState([]);
   const [categorias, setCategorias]           = useState([]);
@@ -78,8 +75,10 @@ export default function EmprendimientoList() {
         )}
 
         {cargando && (
-          <div className="estado-contenedor">
-            <p className="estado-mensaje">Cargando emprendimientos...</p>
+          <div className="skeleton-lista" aria-label="Cargando emprendimientos">
+            {[1, 2, 3, 4].map((i) => (
+              <div key={i} className="skeleton-tarjeta"></div>
+            ))}
           </div>
         )}
 
