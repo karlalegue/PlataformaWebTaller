@@ -26,7 +26,9 @@ def get_emprendimientos(categoria: Optional[str] = None):
         cursor.execute("""
             SELECT e.id,
                    e.nombre_emprendimiento,
-                   c.nombre AS categoria_emprendimiento
+                   c.nombre AS categoria_emprendimiento,
+                   e.latitud,
+                   e.longitud
             FROM emprendimientos e
             JOIN categorias c ON e.categoria_id = c.id
             WHERE c.nombre = ?
@@ -36,7 +38,9 @@ def get_emprendimientos(categoria: Optional[str] = None):
         cursor.execute("""
             SELECT e.id,
                    e.nombre_emprendimiento,
-                   c.nombre AS categoria_emprendimiento
+                   c.nombre AS categoria_emprendimiento,
+                   e.latitud,
+                   e.longitud
             FROM emprendimientos e
             JOIN categorias c ON e.categoria_id = c.id
             ORDER BY e.nombre_emprendimiento ASC

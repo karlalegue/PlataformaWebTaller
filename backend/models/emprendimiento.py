@@ -5,6 +5,8 @@ class Emprendimiento(BaseModel):
     id: int
     nombre_emprendimiento: str
     categoria_emprendimiento: str
+    latitud: Optional[float] = None
+    longitud: Optional[float] = None
     
     
 class detalleEmprendimiento(BaseModel):
